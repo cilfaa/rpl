@@ -1,0 +1,41 @@
+kita bisa analisa dengan buat ERD (entity relation database)
+
+
+menu ada 2 kategori
+makanan khusus diet
+makanan khusus bulking
+
+ini adalah P.O.C proof of concept (piye om carane) atau blueprint sebelum dibuat django
+
+catatan buat grey dan teman-teman " 
+dituntut untuk kreatif supaya belajar tentang product development
+ada product owner/product manager
+
+pengembangan productnya apa...
+
+ada BMI 
+aplikasi penghitung berat badan ideal...
+jika berat badan ideal, maka sarankan plan serat 
+
+jika berat badan underweight, maka sarankan bulking 
+jika berat badan pre-obesitas. maka sarankan diet...
+
+agar sesuai konsep yaitu mealplan, makan berjadwal grey....
+jadi aplikasi memebri resep untuk orang mau diet atau bulking...
+
+JELASKAN KE ASPRAK
+
+
+1. referensi dari figma, buat html struktur
+2. buat style css 
+3. pakai bootstrap dan bootstrap icon 
+4. javascript
+5. setelah ketemu strukturnya buat ERD
+6. bikin POC untuk : 
+6a. bmi step awal supaya bisa merencanakan makan, apakah itu diet atau bulking, jika sesuai rekomendasi 
+6b. maka, tampilkan setiap menu dengan perhitungan nutrisi, apakah nilai perhitungan nutrisi 
+cocok untuk diet atau untuk bulking
+7. ada fitur yang dipilih, maka menampilkan menu masakan yang sesuai untuk plan (diet atau bulking)
+8. bisa add ke list (loved)
+9. user regiter
+10. user login 
