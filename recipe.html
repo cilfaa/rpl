@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meal Detail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="app-container">
+
+  <header class="detail-header">
+    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141" alt="Eggs Benedict">
+    <div class="header-overlay">
+      <button class="icon-btn back-btn" onclick="history.back()">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <h4>M<span>B</span>Grey</h4>
+      <button class="icon-btn">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="detail-content">
+
+    <p class="author">By Gordon Ramsay</p>
+    <h1>Eggs Benedict</h1>
+
+    <div class="meta">
+      <span><i class="bi bi-eye"></i> 105</span>
+    </div>
+
+    <div class="actions">
+      <span><i class="bi bi-clock"></i> 25m</span>
+      <button class="ghost-btn" id="saveBtn">
+        <i class="bi bi-heart"></i> Add to my list
+      </button>
+    </div>
+
+    <section class="section">
+      <h3><i class="bi bi-bar-chart"></i> Nutrition per serving</h3>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px;">
+        <div class="nutrition-box">
+          <strong>Protein</strong>
+          <p>32 g</p>
+        </div>
+
+        <div class="nutrition-box">
+          <strong>Fat</strong>
+          <p>41 g</p>
+        </div>
+
+        <div class="nutrition-box">
+          <strong>Kalori</strong>
+          <p>287 kcal</p>
+        </div>
+        <div class="nutrition-box">
+          <strong>Serat</strong>
+          <p>11 g</p>
+        </div>
+      </div>
+
+      <p class="sub">
+        Values are estimated and suitable for meal planning & diet tracking
+      </p>
+    </section>
+
+    <section class="section">
+      <h3><i class="bi bi-list-check"></i> Ingredients</h3>
+
+      <ul class="ingredients">
+        <li><span>White Wine Vinegar</span><small>3 tbsp</small></li>
+        <li><span>Free-range eggs</span><small>4 units</small></li>
+        <li><span>Toasting Muffins</span><small>2 units</small></li>
+        <li><span>Parma Ham</span><small>4 units</small></li>
+      </ul>
+
+      <p class="sub">For the hollandaise sauce</p>
+
+      <ul class="ingredients">
+        <li><span>Butter</span><small>125 g</small></li>
+        <li><span>Egg yolks</span><small>2 units</small></li>
+        <li><span>White wine vinegar</span><small>1/2 tsp</small></li>
+        <li><span>Lemon juice</span><small>-</small></li>
+        <li><span>Cayenne pepper</span><small>pinch</small></li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3><i class="bi bi-egg-fried"></i> How to Make</h3>
+
+      <div class="steps">
+
+        <p><strong>STEP 1</strong><br>
+        Bring water to boil, add vinegar, lower heat to gentle simmer.</p>
+
+        <p><strong>STEP 2</strong><br>
+        Crack eggs into cups. Toast muffins lightly.</p>
+
+        <p class="sub">For hollandaise sauce</p>
+
+        <p><strong>STEP 1</strong><br>
+        Melt butter, skim solids, keep warm.</p>
+
+        <p><strong>STEP 2</strong><br>
+        Whisk egg yolks with vinegar over simmering water.</p>
+
+        <p><strong>STEP 3</strong><br>
+        Slowly whisk butter, add lemon juice and cayenne.</p>
+
+        <p class="sub">Poached eggs</p>
+
+        <p><strong>STEP 1</strong><br>
+        Swirl water, slide egg in, cook 2 - 3 minutes.</p>
+
+        <p><strong>STEP 2</strong><br>
+        Assemble muffins, ham, egg, sauce. Serve.</p>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <h3>Rate this recipe and comment</h3>
+
+      <div class="stars" id="stars">
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+      </div>
+
+      <textarea placeholder="Write your review of this recipe here..."></textarea>
+      <button class="btn-primary">Publish this review</button>
+
+      <p class="sub">
+        <i class="bi bi-chat"></i> Read the other published reviews
+      </p>
+    </section>
+
+    <section class="section">
+      <h3>
+        <i class="bi bi-hand-thumbs-up"></i>
+        Recipes we recommend for you
+        <small style="margin-left:auto;font-size:12px;color:#777;">see all</small>
+      </h3>
+
+      <div style="display:flex; gap:12px; overflow-x:auto;">
+
+        <div class="meal-mini" style="min-width:140px;">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+          <p>The Ultimate BLT</p>
+          <small><i class="bi bi-clock"></i> 15m</small>
+        </div>
+
+        <div class="meal-mini" style="min-width:140px;">
+          <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e">
+          <p>Pesto Pasta</p>
+          <small><i class="bi bi-clock"></i> 30m</small>
+        </div>
+
+        <div class="meal-mini" style="min-width:140px;">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe">
+          <p>Grilled Sandwich</p>
+          <small><i class="bi bi-clock"></i> 15m</small>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>

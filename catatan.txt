@@ -1,0 +1,12 @@
+Di dalam semantik html ada main yang akan membantu developer dan menunjukkan pada search engine bahwa tag html tersebut
+adalah inti dari content
+di dalam main pakai section di dalam section ada div
+
+section dipakai untuk pengelompokkan konten secara semantik, misal di dokumen ada pendahuluan, bab
+pengelompokan tematik
+
+div atau divide atau division elemen pengelompokan html tak biasanya untuk penataan gambar, teks(paragraf)
+
+supaya lebih mudah styling/layouting di css per nama class atau per nama id
+
+gunanya section ataupun div untuk ngasih identitas setiap pengelompokan elemen

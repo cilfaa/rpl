@@ -1,0 +1,368 @@
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #eaeaea;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* =====================================================
+   mobile first display
+   ===================================================== */
+.app-container {
+  max-width: 414px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #ffffff;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    box-shadow: 0 0 40px rgba(0,0,0,0.2);
+    border-radius: 14px;
+    margin: 20px auto;
+  }
+}
+
+/* =====================================================
+   header bakal global index
+   ===================================================== */
+.app-header {
+  background: #FFD400;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* =====================================================
+   ikon tombol
+   ===================================================== */
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* =====================================================
+   bar search
+   ===================================================== */
+.search-bar {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #FFD400;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.search-bar.active {
+  display: flex;
+}
+
+.search-bar i {
+  font-size: 18px;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* =====================================================
+   konten utama
+   ===================================================== */
+.app-content {
+  padding: 16px;
+  padding-bottom: 100px;
+}
+
+/* =====================================================
+   resep harian
+   ===================================================== */
+.recipe-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
+}
+
+.btn-make {
+  width: 100%;
+  border-radius: 999px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   makanan tampilan mini
+   ===================================================== */
+.meal-mini img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.meal-mini p {
+  margin: 6px 0 0;
+  font-weight: 600;
+}
+
+.meal-mini small {
+  color: #777;
+}
+
+/* =====================================================
+   baru dicek
+   ===================================================== */
+.meal-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.meal-row img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.meal-row h6 {
+  margin: 0;
+}
+
+.meal-row p {
+  font-size: 12px;
+  color: #777;
+  margin: 4px 0 0;
+}
+
+/* =====================================================
+   detail resep yang header
+   ===================================================== */
+.detail-header {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+
+.detail-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.15),
+    transparent
+  );
+  color: #fff;
+}
+
+.header-overlay h4 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.header-overlay h4 span {
+  color: #FFD400;
+}
+
+/* =====================================================
+   detail resep yang konten
+   ===================================================== */
+.detail-content {
+  padding: 16px;
+  padding-bottom: 120px;
+}
+
+.detail-content h1 {
+  margin: 6px 0 8px;
+  font-size: 22px;
+}
+
+.author {
+  font-size: 13px;
+  color: #777;
+  margin: 0;
+}
+
+.meta {
+  font-size: 13px;
+  color: #777;
+  margin: 8px 0;
+}
+
+/* =====================================================
+   baris cek button
+   ===================================================== */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0 20px;
+}
+
+.ghost-btn {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* =====================================================
+   section konten
+   ===================================================== */
+.section {
+  margin-bottom: 28px;
+}
+
+.section h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* =====================================================
+   resep
+   ===================================================== */
+.ingredients {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+}
+
+.ingredients li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 14px;
+  border-bottom: 1px dashed #eee;
+}
+
+.sub {
+  font-size: 13px;
+  color: #777;
+  margin: 12px 0 6px;
+}
+
+/* =====================================================
+   step by step masakan
+   ===================================================== */
+.steps p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+/* =====================================================
+   kasih rating
+   ===================================================== */
+.stars i {
+  font-size: 20px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  font-family: inherit;
+}
+
+.btn-primary {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 12px;
+  background: #FFD400;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* =====================================================
+   bottom navigasi
+   ===================================================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 414px;
+  width: 100%;
+  background: #FFD400;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 20;
+}
+
+.bottom-nav a.nav-item {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-item {
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #333;
+}
+
+.nav-item i {
+  font-size: 18px;
+  display: block;
+}
+
+.nav-item.active {
+  font-weight: 700;
+}

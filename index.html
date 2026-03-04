@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meal Plan App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <header class="app-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <div></div>
+      <h4 class="fw-bold m-0">Meal<span class="small">Plan</span></h4>
+      <button class="icon-btn" id="openSearch">
+        <i class="bi bi-search fs-5"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="search-bar" id="searchBar">
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="Cari menu, kalori, protein...">
+  </div>
+
+  <main class="app-content">
+
+    <section class="daily-recipe">
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-calendar-check me-2"></i>
+        <div>
+          <strong>Today's Meal Plan</strong><br>
+          <small>Senin <i class="bi bi-dot"></i> Target 1,800 kcal</small>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141" alt="Healthy Breakfast">
+        <div class="recipe-overlay">
+          <h5>High Protein Breakfast</h5>
+          <span><i class="bi bi-clock"></i> 25 min <i class="bi bi-dot"></i> 420 kcal</span>
+          <button class="btn btn-warning btn-make">
+            <i class="bi bi-egg-fried me-2"></i>
+            START THIS MEAL
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <strong>Recommended for Your Diet</strong>
+        <small class="text-muted">view all</small>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-6">
+          <div class="meal-mini">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+            <p>Low-Carb Chicken Bowl</p>
+            <small>15 min <i class="bi bi-dot"></i> 350 kcal</small>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="meal-mini">
+            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e">
+            <p>Whole Grain Pasta</p>
+            <small>30 min <i class="bi bi-dot"></i> 480 kcal</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-4 mb-5">
+      <strong>Your Meal History</strong>
+
+      <div class="meal-list mt-3">
+        <div class="meal-row">
+          <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366">
+          <div class="flex-grow-1">
+            <h6>Healthy Homemade Pizza</h6>
+            <small>45 min * 520 kcal</small>
+            <p>Controlled calories with balanced protein and carbs.</p>
+          </div>
+          <i class="bi bi-heart"></i>
+        </div>
+
+        <div class="meal-row">
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e">
+          <div class="flex-grow-1">
+            <h6>Oat & Blueberry Pancakes</h6>
+            <small>15 min * 280 kcal</small>
+            <p>Low sugar breakfast, ideal for diet programs.</p>
+          </div>
+          <i class="bi bi-heart"></i>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <div class="nav-item active">
+      <i class="bi bi-house"></i>
+      <span>Today</span>
+    </div>
+    <div class="nav-item">
+      <i class="bi bi-calendar-week"></i>
+      <span>Plan</span>
+    </div>
+    <div class="nav-item">
+      <i class="bi bi-heart"></i>
+      <span>Saved</span>
+    </div>
+    <div class="nav-item">
+      <i class="bi bi-person"></i>
+      <span>Profile</span>
+    </div>
+  </nav>
+
+</div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
