@@ -1,0 +1,170 @@
+{% include 'includes/header.html' %}
+
+  <main class="app-content">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert-message">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+    <section class="daily-recipe">
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-calendar-check me-2"></i>
+        <div>
+          <strong>Meal Plan Hari Ini</strong><br>
+          <small>
+            <span id="today-date"></span> 
+          </small>
+        </div>
+      </div>
+
+      {% if menu_utama %}
+      <div class="recipe-card">
+        <img src="{{ menu_utama.gambar_menu.url }}" alt="">
+        <div class="recipe-overlay">
+          <a href="{% url 'mealplan:detail-resep' menu_utama.id %}" style="text-decoration:none; color:inherit;">
+            <h5>{{ menu_utama.nama_menu }}</h5>
+          </a>
+          <span>
+            <i class="bi bi-clock"></i>
+            {{ menu_utama.lama_perkiraan_masak }} min *
+            {{ menu_utama.nutrisi.kalori }} kcal
+          </span>
+          <button class="btn btn-warning btn-make">
+            <i class="bi bi-egg-fried me-2"></i>
+            <a href="{% url 'mealplan:detail-resep' menu_utama.id %}" style="text-decoration: none; color:black;" >Mulai masak MBG</a>
+          </button>
+        </div>
+      </div>
+      {% else %}
+        <p>Tidak ada menu utama hari ini.</p>
+      {% endif %}
+    </section>
+
+    <section class="mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        {% if user.is_authenticated and meal_plan %}
+          <strong>Recommended for Your {{ meal_plan|title }}</strong>
+        {% else %}
+          <strong>Recommended for Your Diet</strong>
+        {% endif %}
+        <small><a href="{% url 'mealplan:lihat-semua' %}" style="text-decoration: none; color:black;">view all</a></small>
+      </div>
+
+      {% if recommended_menus %}
+      <div class="row g-3">
+        {% for menu in recommended_menus %}
+        <div class="col-6">
+          <a href="{% url 'mealplan:detail-resep' menu.id %}" style="text-decoration:none; color:inherit;">
+            <div class="meal-mini">
+              <img src="{{ menu.gambar_menu.url }}">
+              <p>{{ menu.nama_menu }}</p>
+              <small>
+                {{ menu.lama_perkiraan_masak }} min 
+                {{ menu.nutrisi.kalori }} kcal
+              </small>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      
+      
+      </div>
+      {% else %}
+      
+      <div class="row g-3">
+        <div class="col-6">
+          <div class="meal-mini">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+            <p>Low-Carb Chicken Bowl</p>
+            <small>15 min • 350 kcal</small>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="meal-mini">
+            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e">
+            <p>Whole Grain Pasta</p>
+            <small>30 min • 480 kcal</small>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </section>
+
+    
+    <section class="mt-4 mb-5">
+      <strong>Your Meal History</strong>
+
+      {% if user.is_authenticated and meal_history %}
+      <div class="meal-list mt-3">
+
+        {% for menu in meal_history %}
+        <div class="meal-row">
+
+          <a href="{% url 'mealplan:detail-resep' menu.id %}" style="display:flex; gap:12px; flex:1; text-decoration:none; color:inherit;">
+
+            <img src="{{ menu.gambar_menu.url }}">
+
+            <div class="flex-grow-1">
+              <h6>{{ menu.nama_menu }}</h6>
+              <small>{{ menu.lama_perkiraan_masak }} min * {{ menu.nutrisi.kalori }} kcal</small>
+              <p>
+                Kategori:
+                {% for k in menu.kategori.all %}
+                  {{ k.nama_kategori }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </p>
+            </div>
+
+          </a>
+
+          <a href="javascript:void(0)" class="heart-btn {% if user in menu.diloved_oleh.all %}active{% endif %}" data-id="{{ menu.id }}">
+            <i class="bi {% if user in menu.diloved_oleh.all %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
+          </a>
+
+        </div>
+      {% endfor %}
+
+      </div>
+
+      {% else %}
+      <div class="meal-list mt-3">
+
+        <div class="meal-row">
+          <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366">
+          <div class="flex-grow-1">
+            <h6>Healthy Homemade Pizza</h6>
+            <small>45 min * 520 kcal</small>
+            <p>Controlled calories with balanced protein and carbs.</p>
+          </div>
+          <a href="javascript:void(0)" class="heart-btn">
+            <i class="bi bi-heart"></i>
+          </a>
+        </div>
+
+        <div class="meal-row">
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e">
+          <div class="flex-grow-1">
+            <h6>Oat & Blueberry Pancakes</h6>
+            <small>15 min * 280 kcal</small>
+            <p>Low sugar breakfast, ideal for diet programs.</p>
+          </div>
+          <a href="javascript:void(0)" class="heart-btn">
+            <i class="bi bi-heart"></i>
+          </a>
+        </div>
+
+      </div>
+      {% endif %}
+    </section>
+    
+
+  </main>
+{% include 'includes/footer.html' %}
+<script>
+  const today = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById("today-date").innerText =
+    today.toLocaleDateString('id-ID', options);
+</script>

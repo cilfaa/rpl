@@ -1,0 +1,84 @@
+{% include 'includes/header.html' %}
+
+<main class="app-content">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert-message">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <h2>BMI Calculator</h2>
+  <p class="subtitle">Hitung BMI dan dapatkan rekomendasi plan</p>
+
+  <div class="bmi-card">
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label>Tinggi Badan (cm)</label>
+        <input type="number" name="tinggi" step="0.1" required>
+      </div>
+
+      <div class="form-group">
+        <label>Berat Badan (kg)</label>
+        <input type="number" name="berat" step="0.1" required>
+      </div>
+
+      <button type="submit" class="primary-btn">
+        Hitung BMI
+      </button>
+    </form>
+
+    {% if bmi %}
+      <div class="bmi-result">
+        <h3>Hasil BMI: {{ bmi }}</h3>
+        <p>Kategori: <strong>{{ kategori }}</strong></p>
+        <p>Rekomendasi: <strong>{{ rekomendasi }}</strong></p>
+      </div>
+    {% endif %}
+
+    <div class="meal-plan-section">
+
+        <h3 class="meal-plan-title">Pilih Meal Plan</h3>
+
+        <form method="POST" class="meal-plan-form">
+            {% csrf_token %}
+
+            <div class="meal-plan-group">
+                <label for="selected_plan">Plan</label>
+
+                <select id="selected_plan" name="selected_plan" required>
+
+                    {% if not current_plan %}
+                        <option value="" selected>Pilih Plan</option>
+                        <option value="diet">Diet</option>
+                        <option value="bulking">Bulking</option>
+
+                    {% elif current_plan == 'diet' %}
+                        <option value="diet" selected>Diet</option>
+                        <option value="bulking">Bulking</option>
+
+                    {% elif current_plan == 'bulking' %}
+                        <option value="bulking" selected>Bulking</option>
+                        <option value="diet">Diet</option>
+
+                    {% endif %}
+
+                </select>
+            </div>
+
+            <button type="submit" class="meal-plan-btn">
+                Simpan Plan
+            </button>
+
+        </form>
+
+    </div>
+
+  </div>
+
+</main>
+
+{% include 'includes/footer.html' %}

@@ -1,0 +1,62 @@
+{% include 'includes/header.html' %}
+
+<div class="dashboard-column">
+  <h3>Your Loved Meals</h3>
+
+  {% if loved_menus %}
+    {% for menu in loved_menus %}
+      <div class="meal-card"
+           style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+
+        <div style="display:flex; gap:10px; align-items:center;">
+
+          {% if menu.gambar_menu %}
+            <img src="{{ menu.gambar_menu.url }}"
+                 style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
+          {% endif %}
+
+          <div>
+            <h4 style="margin:0;">
+              <a href="{% url 'mealplan:detail-resep' menu.id %}"
+                 style="text-decoration:none; color:inherit;">
+                {{ menu.nama_menu }}
+              </a>
+            </h4>
+          </div>
+
+        </div>
+
+        <!-- BUTTON UNLOVE -->
+        <button onclick="batalLoved({{ menu.id }}, this)"
+                style="border:none; background:none; font-size:20px; cursor:pointer; color:red;">
+          <i class="bi bi-heart-fill"></i>
+        </button>
+
+      </div>
+    {% endfor %}
+  {% else %}
+      <div class="meal-card">
+        <h4>Belum ada menu favorit</h4>
+      </div>
+  {% endif %}
+
+</div>
+
+<script>
+function batalLoved(menuId, btn) {
+    fetch(`/batal-loved/${menuId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "ok") {
+            btn.closest(".meal-card").remove();
+        }
+    });
+}
+</script>
+
+{% include 'includes/footer.html' %}

@@ -1,0 +1,98 @@
+{% include 'includes/header.html' %}
+
+<main class="app-content">
+
+  <h2 style="margin-bottom:4px;">Hi, {{ request.user.username }}</h2>
+  <p class="subtitle">Your personalized meal dashboard</p>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert-message">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="dashboard-grid">
+
+    <!-- belah kiri -->
+    <div class="dashboard-column">
+      <!-- <h3>Recommended For You</h3> -->
+
+      <div class="plan-tag">
+        Current Plan:
+        <strong>
+            {% if current_plan %}
+            {{ current_plan|capfirst }}
+            {% else %}
+            Belum memilih plan
+            {% endif %}
+        </strong>
+      </div>
+
+      <!-- <div class="meal-card">
+        <h4>Grilled Chicken Bowl</h4>
+        <p>High protein, low fat</p>
+      </div>
+
+      <div class="meal-card">
+        <h4>Oatmeal Banana</h4>
+        <p>Clean carbs, fiber rich</p>
+      </div> -->
+
+    </div>
+
+    <!-- belah kanan -->
+    <!-- <div class="dashboard-column">
+      <h3>Your Loved Meals</h3>
+
+      <div class="meal-card">
+        <h4>Avocado Toast</h4>
+      </div>
+
+      <div class="meal-card">
+        <h4>Salmon Teriyaki</h4>
+      </div>
+
+    </div> -->
+
+  </div>
+
+  <hr style="margin:30px 0;">
+
+    <h3>Change Password</h3>
+
+    <form method="POST" action="{% url 'mealplan:ganti-password' %}" class="change-password-form">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label>Password Sekarang</label>
+      <input type="password" name="current_password" required>
+    </div>
+
+    <div class="form-group">
+      <label>Password Baru</label>
+      <input type="password" name="new_password" required>
+    </div>
+
+    <div class="form-group">
+      <label>Ulangi Password Baru</label>
+      <input type="password" name="confirm_password" required>
+    </div>
+
+    <button type="submit" class="primary-btn">
+      Update Password
+    </button>
+
+    </form>
+
+  <form method="POST" action="{% url 'mealplan:logout' %}" style="margin-top:20px;">
+    {% csrf_token %}
+    <button type="submit" class="logout-btn">
+      Logout
+    </button>
+  </form>
+
+</main>
+
+{% include 'includes/footer.html' %}

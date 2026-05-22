@@ -1,0 +1,41 @@
+{% include 'includes/header.html' %}
+
+<div class="dashboard-column">
+  <h3>Search Results</h3>
+
+  {% if results %}
+    {% for menu in results %}
+      <div class="meal-card" style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+
+        {% if menu.gambar_menu %}
+          <img src="{{ menu.gambar_menu.url }}" alt="{{ menu.nama_menu }}" style="width:70px; height:70px; object-fit:cover; border-radius:10px;">
+        {% else %}
+          <div style="width:70px; height:70px; background:#eee; border-radius:10px;"></div>
+        {% endif %}
+
+        <div style="flex:1;">
+          <h4 style="margin:0 0 4px 0;">
+            <a href="{% url 'mealplan:detail-resep' menu.id %}"
+               style="text-decoration:none; color:inherit;">
+              {{ menu.nama_menu }}
+            </a>
+          </h4>
+
+          {% if menu.nutrisi %}
+            <small>
+              {{ menu.nutrisi.kalori }} kcal •
+              {{ menu.nutrisi.protein }}g protein
+            </small>
+          {% endif %}
+        </div>
+
+      </div>
+    {% endfor %}
+  {% else %}
+      <div class="meal-card">
+        <h4>Tidak ditemukan</h4>
+      </div>
+  {% endif %}
+</div>
+
+{% include 'includes/footer.html' %}

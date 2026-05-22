@@ -1,0 +1,197 @@
+{% include 'includes/header.html' %}
+
+<header class="detail-header">
+    <img src="{{ menu.gambar_menu.url }}" alt="{{ menu.nama_menu }}">
+    <div class="header-overlay">
+      <button class="icon-btn back-btn" onclick="history.back()">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="icon-btn">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </header>
+
+<main class="detail-content">
+
+    <p class="author">By {{ menu.posted_by.username }}</p>
+    <h1>{{ menu.nama_menu }}</h1>
+    
+    <div class="meta">
+      <span><i class="bi bi-eye"></i> {{ menu.dibaca }}</span>
+    </div>
+
+    
+    <div class="actions">
+      <span><i class="bi bi-clock"></i> {{ menu.lama_perkiraan_masak }}m</span>
+      
+      {% if user.is_authenticated %}
+      <button class="ghost-btn {% if user in menu.diloved_oleh.all %}active{% endif %}" id="saveBtn" data-id="{{ menu.id }}">
+        <i class="bi {% if user in menu.diloved_oleh.all %}bi-heart-fill{% else %}bi-heart{% endif %}"></i>
+        Add to my list
+        </button>
+        {% else %}
+        <button class="ghost-btn" onclick="alert('Login dulu ya')">
+        <i class="bi bi-heart"></i> Add to my list
+        </button>
+      {% endif %}
+      
+    </div>
+
+    
+    <section class="section">
+      <h3><i class="bi bi-bar-chart"></i> Nutrition per serving</h3>
+
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px;">
+        <div class="nutrition-box">
+          <strong>Protein</strong>
+          <p>{{ menu.nutrisi.protein }} g</p>
+        </div>
+
+        <div class="nutrition-box">
+          <strong>Fat</strong>
+          <p>{{ menu.nutrisi.lemak }} g</p>
+        </div>
+
+        <div class="nutrition-box">
+          <strong>Kalori</strong>
+          <p>{{ menu.nutrisi.kalori }} kcal</p>
+        </div>
+        <div class="nutrition-box">
+          <strong>Serat</strong>
+          <p>{{ menu.nutrisi.serat }} g</p>
+        </div>
+      </div>
+
+      <p class="sub">
+        Values are estimated and suitable for meal planning & diet tracking
+      </p>
+    </section>
+
+    
+    <section class="section">
+      <h3><i class="bi bi-list-check"></i> Bahan-bahan</h3>
+
+      <ul class="ingredients">
+        {% for b in menu.bahan.all %}
+            <li>
+            <span>{{ b.master_nutrisi.nama_bahan }}</span>
+            <small>{{ b.jumlah }} {{ b.satuan }}</small>
+            </li>
+        {% endfor %}
+        </ul>
+    </section>
+
+    
+    <section class="section">
+      <h3><i class="bi bi-egg-fried"></i> Cara Memasak</h3>
+
+      <div class="steps">
+        {% for step in menu.cara_masak.all %}
+            <p>
+            <strong>STEP {{ step.urutan }}</strong><br>
+            {{ step.deskripsi }}
+            </p>
+        {% endfor %}
+        </div>
+    </section>
+
+    <!-- <section class="section">
+      <h3>Rate this recipe and comment</h3>
+
+      <div class="stars" id="stars">
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+        <i class="bi bi-star"></i>
+      </div>
+
+      <textarea placeholder="Write your review of this recipe here..."></textarea>
+      <button class="btn-primary">Publish this review</button>
+
+      <p class="sub">
+        <i class="bi bi-chat"></i> Read the other published reviews
+      </p>
+    </section> -->
+
+    <section class="section">
+        <h3>
+            <i class="bi bi-hand-thumbs-up"></i>
+            Resep yang cocok buat plan kamu
+        </h3>
+
+        <div style="display:flex; gap:12px; overflow-x:auto;">
+
+            {% if user.is_authenticated and recommended %}
+            
+            {% for r in recommended %}
+            <div class="meal-mini" style="min-width:140px;">
+                <img src="{{ r.gambar_menu.url }}">
+                <p>{{ r.nama_menu }}</p>
+                <small><i class="bi bi-clock"></i> {{ r.lama_perkiraan_masak }}m</small>
+            </div>
+            {% endfor %}
+
+            {% else %}
+
+            <div class="meal-mini" style="min-width:140px;">
+                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+                <p>The Ultimate BLT</p>
+                <small><i class="bi bi-clock"></i> 15m</small>
+            </div>
+
+            <div class="meal-mini" style="min-width:140px;">
+                <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e">
+                <p>Oat Blueberry Pancake</p>
+                <small><i class="bi bi-clock"></i> 10m</small>
+            </div>
+
+            {% endif %}
+
+        </div>
+    </section>
+
+  </main>
+
+
+{% include 'includes/footer.html' %}
+
+<script>
+const saveBtn = document.getElementById("saveBtn");
+
+if (saveBtn) {
+
+  saveBtn.addEventListener("click", function () {
+
+    const menuId = this.dataset.id;
+
+    fetch(`/toggle-love/${menuId}/`)
+      .then(response => response.json())
+      .then(data => {
+
+        if (data.status === "ok") {
+
+          const icon = this.querySelector("i");
+
+          this.classList.toggle("active");
+
+          if (icon) {
+            icon.classList.toggle("bi-heart");
+            icon.classList.toggle("bi-heart-fill");
+          }
+
+          if (data.loved) {
+            console.log("ditambahkan ke my list");
+          } else {
+            console.log("dihapus dari my list");
+          }
+
+        }
+
+      });
+
+  });
+
+}
+</script>

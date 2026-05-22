@@ -1,0 +1,48 @@
+{% include 'includes/header.html' %}
+
+<main class="app-content authorize">
+  <h2>Create account</h2>
+  <p class="subtitle">Sign up to start managing your meal plan</p>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert-message">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <form id="signupForm" method="POST" action="{% url 'mealplan:daftar' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="username" name="username" placeholder="Choose a username" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" name="password" placeholder="Create a password" required>
+    </div>
+
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat your password" required>
+    </div>
+
+    <button type="submit" id="authorizeBtn">
+      Sign Up
+    </button>
+
+  </form>
+
+  <p class="switch-link">
+    Already have an account?
+    <a href="{% url 'mealplan:masuk' %}">Login</a>
+  </p>
+
+</main>
+
+{% include 'includes/footer.html' %}

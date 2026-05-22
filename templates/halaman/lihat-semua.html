@@ -1,0 +1,88 @@
+{% include 'includes/header.html' %}
+
+<section class="mt-4 px-3">  <!-- margin top px-3 padding sumbu x horizontal biar agak masuk -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    {% if user.is_authenticated and meal_plan %}
+      <strong>Recommended for Your {{ meal_plan|title }}</strong>
+    {% else %}
+      <strong>Recommended for Your Diet</strong>
+    {% endif %}
+  </div>
+
+  <div class="row g-3" id="menu-container">
+    {% for menu in recommended_menus %}
+    <div class="col-6">
+      <a href="{% url 'mealplan:detail-resep' menu.id %}" style="text-decoration:none; color:inherit;">
+        <div class="meal-mini">
+          {% if menu.gambar_menu %}
+            <img src="{{ menu.gambar_menu.url }}">
+          {% endif %}
+          <p>{{ menu.nama_menu }}</p>
+          {% if menu.nutrisi %}
+          <small>
+            {{ menu.lama_perkiraan_masak }} min •
+            {{ menu.nutrisi.kalori }} kcal
+          </small>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="loading" class="text-center mt-3" style="display:none;">
+    <small>Loading...</small>
+  </div>
+</section>
+
+<script>
+let page = 2;
+let loading = false;
+let hasNext = {{ recommended_menus.has_next|yesno:"true,false" }};
+
+window.addEventListener("scroll", function () {
+    if (loading || !hasNext) return;
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+        loadMore();
+    }
+});
+
+function loadMore() {
+    loading = true;
+    document.getElementById("loading").style.display = "block";
+
+    fetch(`?page=${page}`, {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        const container = document.getElementById("menu-container");
+
+        data.menus.forEach(menu => {
+            const col = document.createElement("div");
+            col.className = "col-6";
+
+            col.innerHTML = `
+                <a href="/detail-resep/${menu.id}/" style="text-decoration:none; color:inherit;">
+                  <div class="meal-mini">
+                    ${menu.gambar ? `<img src="${menu.gambar}">` : ""}
+                    <p>${menu.nama_menu}</p>
+                    <small>${menu.waktu} min • ${menu.kalori} kcal</small>
+                  </div>
+                </a>
+            `;
+
+            container.appendChild(col);
+        });
+
+        hasNext = data.has_next;
+        page += 1;
+        loading = false;
+        document.getElementById("loading").style.display = "none";
+    });
+}
+</script>
+
+{% include 'includes/footer.html' %}
